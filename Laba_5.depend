@@ -1,34 +1,34 @@
 # depslib dependency file v1.0
-1547581840 source:c:\users\Вася\documents\programs(trash)\laba_5\main.cpp
+1548077463 source:c:\users\Вася\documents\programs(trash)\laba_5\main.cpp
 	<iostream>
 	"Student.h"
 	"Group.h"
 	"Deanery.h"
 	<vector>
 
-1547582323 source:c:\users\Вася\documents\programs(trash)\laba_5\src\group.cpp
+1548078528 source:c:\users\Вася\documents\programs(trash)\laba_5\src\group.cpp
 	"Group.h"
 
-1547582244 c:\users\Вася\documents\programs(trash)\laba_5\include\group.h
+1548076225 c:\users\Вася\documents\programs(trash)\laba_5\include\group.h
 	<string>
 	<vector>
 	"Student.h"
 	<iostream>
 	<stdlib.h>
 
-1547582256 c:\users\Вася\documents\programs(trash)\laba_5\include\student.h
+1548078425 c:\users\Вася\documents\programs(trash)\laba_5\include\student.h
 	<vector>
 	<string>
 	"Group.h"
 	<iostream>
 
-1547500967 source:c:\users\Вася\documents\programs(trash)\laba_5\src\student.cpp
+1548078446 source:c:\users\Вася\documents\programs(trash)\laba_5\src\student.cpp
 	"Student.h"
 
-1547582302 source:c:\users\Вася\documents\programs(trash)\laba_5\src\deanery.cpp
+1548077347 source:c:\users\Вася\documents\programs(trash)\laba_5\src\deanery.cpp
 	"Deanery.h"
 
-1547581587 c:\users\Вася\documents\programs(trash)\laba_5\include\deanery.h
+1548078555 c:\users\Вася\documents\programs(trash)\laba_5\include\deanery.h
 	<vector>
 	<iostream>
 	<string>

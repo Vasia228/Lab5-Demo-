@@ -8,6 +8,7 @@ using namespace std;
 
 int main()
 {
+    setlocale(LC_ALL, "Russian");
     /*vector<Student*> students;
     //students.push_back(new Student(1,"SimpsonBG"));
     //students.push_back(new Student(2,"SimpsonLG"));
@@ -29,5 +30,6 @@ int main()
     Deanery HSE;
     HSE.add_marks();
     HSE.choice_init();
+    HSE.printall();
     return 0;
 }
