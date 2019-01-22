@@ -18,13 +18,15 @@ class Group
         ~Group();
         string getTitle(){return this->title;};
         int getSize(){return this->students.size();};
+
+        int getRand(int a, int b);
         void add_student(Student* student_, bool flag=true);
-        void head_choice(int num);
+        void head_choice();
         void head_choice(Student* student_);
         Student* search_student(string fio_);
         Student* search_student(int id);
         float calculate_average_mark();
-        void eliminate(int id, Group* group_=0);
+        void eliminate(Student* student_, Group* group_=0);
 
         //Debug method
         void print_members();
