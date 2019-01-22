@@ -6,14 +6,11 @@ Deanery::Deanery(char student_data[], char group_data[])
     srand(time(NULL));
     ifstream file(student_data, ios::in);
     string str;
-    int i,id_;
+    int i,id_=1;
     while(getline(file, str))
     {
-        i=id_=0;
-        while (str[i]!=' ')i++;
-        id_=atoi(str.substr(i+1, str.size()-i-1).c_str());
-        str=str.substr(0,i);
         students.push_back(new Student(id_, str));
+        id_++;
     }
     file.close();
 
@@ -54,14 +51,25 @@ Deanery::~Deanery()
 
 void Deanery::save(char student_data[], char group_data[])
 {
+    if (student_data!=0){
+        save_students(student_data);
+    }
+    if (group_data!=0){
+        save_groups(group_data);
+    }
+}
+
+void Deanery::save_students(char student_data[]){
     ofstream file(student_data, ios::out);
     for (int i=0; i<students.size(); i++)
     {
-        file<<students[i]->getfio()<<" "<<students[i]->getId()<<endl;
+        file<<students[i]->getfio()<<" "<<endl;
     }
     file.close();
+}
 
-    file.open(group_data, ios::out);
+void Deanery::save_groups(char group_data[]){
+    ofstream file(group_data, ios::out);
     for (int i=0; i<groups.size(); i++)
     {
         file<<groups[i]->getTitle();
@@ -101,14 +109,35 @@ Student* Deanery::getStudent(int id)
     }
 }
 
-void Deanery::swap_student(int id, string title_)
+void Deanery::swap_student(Student* student_, Group* group_)
 {
-    Student* student_=getStudent(id);
-    Group* group_=getGroup(title_);
-    if (student_->getGroup()!=group_)
+    Group* Old_Group = student_->getGroup();
+    Old_Group->eliminate(student_);
+    group_->add_student(student_);
+}
+
+void Deanery::eliminate_student(Student* student_){
+    Group* group_=student_->getGroup();
+    group_->eliminate(student_);
+    for (int i=0; i<students.size(); i++)
     {
-        student_->getGroup()->eliminate(id, group_);
-        group_->add_student(student_, true);
+        if (students[i]==student_)
+        {
+            students.erase(students.begin()+i);
+            break;
+        }
+    }
+}
+
+void Deanery::eliminate_student(float lowest_score)
+{
+    float mark=0;
+    Group* group_=0;
+    for (int i=0; i<students.size(); i++){
+        mark=students[i]->calculate_average_mark();
+        if (mark < lowest_score){
+            eliminate_student(students[i]);
+        }
     }
 }
 
@@ -119,11 +148,13 @@ int Deanery::getRand(int a, int b)
     return num;
 }
 
-void Deanery::add_marks()
+void Deanery::add_marks(int amount)
 {
     for (int i=0; i<students.size(); i++)
     {
-        students[i]->add_mark(getRand(0, 10));
+        for (int j=0; j<amount; j++){
+            students[i]->add_mark(getRand(0, 10));
+        }
     }
 }
 
@@ -132,8 +163,7 @@ void Deanery::choice_init()
     int num;
     for (int i=0; i<groups.size(); i++)
     {
-        num=getRand(0,groups[i]->getSize()-1);
-        groups[i]->head_choice(num);
+        groups[i]->head_choice();
     }
 }
 
@@ -144,7 +174,7 @@ void Deanery::printall()
     cout<<"PRINTALL"<<endl;
     for (int i=0; i<groups.size();i++)
     {
-        cout<<groups[i]->getTitle()<<": ";
+        cout<<groups[i]->getTitle()<<": "<<endl;
         groups[i]->print_members();
     }
 }

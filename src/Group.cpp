@@ -10,6 +10,13 @@ Group::~Group()
     //dtor
 }
 
+int Group::getRand(int a, int b)
+{
+    int num;
+    num=a+rand()%(b-a+1);
+    return num;
+}
+
 void Group::add_student(Student* student_, bool flag)
 {
     students.push_back(student_);
@@ -19,9 +26,10 @@ void Group::add_student(Student* student_, bool flag)
     }
 }
 
-void Group::head_choice(int num)
+void Group::head_choice()
 {
-    head=students[num];
+    int num= getRand(0, students.size()-1);
+    head_choice(students[num]);
 }
 
 void Group::head_choice(Student* student_)
@@ -65,14 +73,13 @@ float Group::calculate_average_mark()
     return average_mark;
 }
 
-void Group::eliminate(int id, Group* group_)
+void Group::eliminate(Student* student_, Group* group_)
 {
-    Student* student_= this->search_student(id);
     for (int i=0; i<students.size(); i++)
     {
         if (students[i]==student_)
         {
-            students[i]->elimenated(group_);
+            students[i]->eliminated(group_);
             students.erase(students.begin()+i);
             break;
         }
@@ -85,7 +92,7 @@ void Group::print_members()
 {
     for (int i=0; i<students.size(); i++)
     {
-        cout<<students[i]->getfio()<<" "<<students[i]->getId()<<" | ";
+        cout<<students[i]->getfio()<<" "<<students[i]->getId()<<endl;
     }
     cout<<endl;
 }

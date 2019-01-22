@@ -39,7 +39,7 @@ void Student::addGroup(Group* group_, bool flag)
     }
 }
 
-void Student::elimenated(Group* group_)
+void Student::eliminated(Group* group_)
 {
     group=group_;
 }
